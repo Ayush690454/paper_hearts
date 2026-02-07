@@ -1,4 +1,4 @@
-class CreateWalls < ActiveRecord::Migration[8.1]
+class CreateWalls < ActiveRecord::Migration[7.2]
   def change
     create_table :walls do |t|
       t.string :title

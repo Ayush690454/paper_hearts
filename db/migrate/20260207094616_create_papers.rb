@@ -1,4 +1,4 @@
-class CreatePapers < ActiveRecord::Migration[8.1]
+class CreatePapers < ActiveRecord::Migration[7.2]
   def change
     create_table :papers do |t|
       t.text :content
