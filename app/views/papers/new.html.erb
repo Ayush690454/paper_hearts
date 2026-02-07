@@ -1,0 +1,22 @@
+<turbo-frame id="modal">
+  <div class="modal-overlay" data-action="click->modal#close">
+    <div class="modal-card" data-action="click->stop">
+      <h2>New Note 💌</h2>
+
+      <%= form_with model: @paper, url: wall_papers_path, data: { turbo: false } do |f| %>
+        <%= f.text_area :content,
+              rows: 4,
+              placeholder: "Write something sweet...",
+              autofocus: true %>
+
+        <%= f.select :paper_type,
+              [["Note", "note"], ["Heart ❤️", "heart"]] %>
+
+        <div class="modal-actions">
+          <%= f.submit "Create" %>
+          <%= link_to "Cancel", wall_path %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</turbo-frame>

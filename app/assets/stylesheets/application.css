@@ -1,0 +1,511 @@
+/*
+ *= require_tree .
+ *= require_self
+*/
+
+/* ================================================= */
+/* GLOBAL BACKGROUND                                 */
+/* ================================================= */
+
+body.romantic-bg {
+  height: 100vh;
+  margin: 0;
+  background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: 'Zeyada', cursive;
+  overflow: hidden;
+}
+
+/* ================================================= */
+/* TOP BAR                                          */
+/* ================================================= */
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  min-height: 80px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 20px;
+  background: rgba(255, 182, 193, 0.75);
+  backdrop-filter: blur(6px);
+
+  z-index: 9999;
+}
+
+.wall-title {
+  font-size: 32px;
+  color: #4b0033;
+
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 24px;
+  border-radius: 40px;
+
+  font-size: 20px;
+  line-height: 1;
+
+  color: #4b0033;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ============================= */
+/* WALL                          */
+/* ============================= */
+
+.wall-container {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+  overflow: hidden;
+}
+
+/* ============================= */
+/* PAPER (VISIBLE & DRAGGABLE)   */
+/* ============================= */
+
+.paper {
+  position: absolute;
+
+  min-width: 260px;
+  min-height: 120px;
+
+  z-index: 10;              /* 🔥 IMPORTANT */
+  cursor: grab;
+  user-select: none;
+}
+
+.paper:active {
+  cursor: grabbing;
+}
+
+/* ============================= */
+/* PAPER INNER (VISIBLE)         */
+/* ============================= */
+
+.paper-inner {
+  width: 100%;
+  height: 100%;
+
+  padding: 20px 30px;
+
+  background-color: #ffffff; /* 🔥 FORCE VISIBILITY */
+  background-image: url("https://i0.wp.com/textures.world/wp-content/uploads/2018/10/2-Millimeter-Paper-Background-copy.jpg");
+  background-size: cover;
+
+  border-radius: 8px;
+
+  font-size: 32px;
+  font-family: 'Zeyada', cursive;
+  color: #3b0033;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+/* .paper {
+  outline: 2px dashed hotpink;
+} */
+
+/* Hover lift (SAFE) */
+.paper-inner:hover {
+  transform: scale(1.04);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* ================================================= */
+/* PAPER CONTENT                                    */
+/* ================================================= */
+
+.paper-content {
+  opacity: 0.85;
+  line-height: 1.2;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/* ================================================= */
+/* FLOATING ANIMATION                               */
+/* ================================================= */
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ================================================= */
+/* PAPER TYPES                                      */
+/* ================================================= */
+
+.paper.note .paper-inner {
+  background-color: #fffdf7;
+}
+
+.paper.heart .paper-inner {
+  background: linear-gradient(135deg, #ffb6c1, #ffd6e0);
+  border-radius: 50%;
+
+  width: 220px;
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 34px;
+  text-align: center;
+}
+.add-note-btn {
+  margin-right: 12px;
+  background: rgba(255,255,255,0.9);
+  padding: 8px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #4b0033;
+}
+
+/* ============================= */
+/* MODAL FIX (INTERACTIVE)       */
+/* ============================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10000;          /* 🔥 ABOVE EVERYTHING */
+  pointer-events: auto;   /* 🔥 ENABLE CLICKS */
+}
+
+.modal-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 340px;
+
+  pointer-events: auto;   /* 🔥 ENABLE INPUT */
+}
+
+.modal-card h2 {
+  margin-top: 0;
+}
+
+.modal-card textarea,
+.modal-card select,
+.modal-card input[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+.paper.heart .paper-inner {
+  width: 220px;
+  height: 220px;
+}
+/* ================================================= */
+/* LANDING PAGE                                      */
+/* ================================================= */
+
+.landing-page {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.landing-card {
+  background: rgba(255, 182, 193, 0.75);
+  padding: 40px 60px;
+  border-radius: 30px;
+
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.landing-card h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+  color: #4b0033;
+  font-family: 'Zeyada', cursive;
+}
+
+.start-wall-btn {
+  display: inline-block;
+
+  padding: 14px 36px;
+  font-size: 24px;
+  text-decoration: none;
+
+  background: #ffffff;
+  color: #4b0033;
+
+  border-radius: 40px;
+  transition: all 0.3s ease;
+}
+
+.start-wall-btn:hover {
+  transform: scale(1.08);
+  background: #fff0f5;
+}
+/* ================================================= */
+/* AUTH PAGES (LOGIN / SIGNUP)                       */
+/* ================================================= */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-card {
+  background: rgba(255, 182, 193, 0.8);
+  padding: 40px 50px;
+  border-radius: 30px;
+
+  width: 100%;
+  max-width: 380px;
+
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  font-family: 'Zeyada', cursive;
+  color: #4b0033;
+}
+
+.auth-card h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 42px;
+}
+
+.auth-card .field {
+  margin-bottom: 16px;
+}
+
+.auth-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+
+.auth-card .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auth-card .actions {
+  margin-top: 20px;
+}
+
+.auth-card input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+
+  background: white;
+  color: #4b0033;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.auth-links a {
+  display: block;
+  margin-top: 6px;
+  color: #4b0033;
+  text-decoration: none;
+}
+.auth-links a {
+  display: inline-block;
+  margin-top: 10px;
+
+  padding: 6px 14px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.6);
+  color: #4b0033;
+
+  font-size: 18px;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.auth-links a:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+}
+.auth-links a:last-child {
+  margin-top: 14px;
+  opacity: 0.85;
+  font-size: 16px;
+}
+.auth-card input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+}
+.auth-card input[type="submit"] {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.auth-card input[type="submit"]:hover {
+  background: #fff0f5;
+  transform: scale(1.04);
+}
+/* ========================================= */
+/* SUBTLE ENTRANCE ANIMATIONS ✨              */
+/* ========================================= */
+
+@keyframes softFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Respect accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+.auth-card h1 {
+  animation: softFadeUp 0.5s ease-out both;
+}
+
+.auth-card .field {
+  animation: softFadeUp 0.55s ease-out both;
+}
+
+.auth-card .actions {
+  animation: softFadeUp 0.6s ease-out both;
+}
+
+.auth-links {
+  animation: softFadeUp 0.65s ease-out both;
+}
+
+.auth-card input[type="submit"] {
+  animation: softFadeUp 0.7s ease-out both;
+}
+/* ================================ */
+/* MODAL FADE-IN 💌                  */
+/* ================================ */
+
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-overlay {
+  animation: modalFadeIn 0.35s ease-out both;
+}
+
+.modal-card {
+  animation: modalFadeIn 0.45s ease-out both;
+}
+/* ================================ */
+/* HEARTBEAT HOVER 💗               */
+/* ================================ */
+
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1.06); }
+  40%  { transform: scale(1); }
+  60%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.auth-card input[type="submit"]:hover,
+.start-wall-btn:hover,
+.add-note-btn:hover {
+  animation: heartbeat 0.6s ease-in-out;
+}
+/* ================================ */
+/* PAGE CROSSFADE 🌸                */
+/* ================================ */
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  animation: pageFade 0.35s ease-in both;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
